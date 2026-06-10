@@ -153,14 +153,28 @@ export default function App() {
   return (
     <div class="app-container">
       <header class="app-header">
-        <h1>🧧 家族拜年排期日历</h1>
-        <p class="subtitle">
-          跨越时区，亲情不断 · 当前时区: {tzDisplay().cityName} ({tzDisplay().offset})
-          {tzDisplay().isDST && ' · 夏令时'}
-        </p>
+        <div class="header-top">
+          <div class="header-title-section">
+            <h1>🧧 家族拜年排期日历</h1>
+            <p class="subtitle">
+              跨越时区，亲情不断 · 当前时区: {tzDisplay().cityName} ({tzDisplay().offset})
+              {tzDisplay().isDST && ' · 夏令时'}
+            </p>
+          </div>
+          <UserSelector
+            members={members()}
+            currentUserId={currentUserId()}
+            onSelect={handleSelectUser}
+          />
+        </div>
         <div class="header-actions">
-          <button class="btn btn-header" onClick={() => setShowCreateSlot(true)}>
-            + 创建时段
+          <button 
+            class={`btn btn-header ${!currentUser()?.isAdmin ? 'btn-disabled' : ''}`} 
+            onClick={() => currentUser()?.isAdmin && setShowCreateSlot(true)}
+            disabled={!currentUser()?.isAdmin}
+            title={currentUser()?.isAdmin ? '创建新的拜年时段' : '仅管理员可创建时段，请切换到管理员身份'}
+          >
+            ➕ 创建时段
           </button>
           <button class="btn btn-header" onClick={handleExportIcs}>
             📅 导出 iCal
@@ -172,6 +186,11 @@ export default function App() {
             ⏰ 我的可接听时间
           </button>
         </div>
+        {!currentUser()?.isAdmin && (
+          <p class="admin-hint">
+            💡 提示：切换到管理员身份（爷爷/大伯）可创建时段
+          </p>
+        )}
       </header>
       
       <div class="app-main">
@@ -186,12 +205,6 @@ export default function App() {
         />
         
         <aside class="sidebar">
-          <UserSelector
-            members={members()}
-            currentUserId={currentUserId()}
-            onSelect={handleSelectUser}
-          />
-          
           <RecommendedSlots
             slots={recommendedSlots()}
             members={members()}
