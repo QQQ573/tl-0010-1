@@ -147,31 +147,76 @@ export function sliceTimeToDays(
   return slices;
 }
 
+const REFERENCE_TIMEZONE = 'Asia/Shanghai';
+
 export function availabilityToUtcRange(
   date: string,
   startTime: string,
   endTime: string,
   timezone: string
 ): { startIso: string; endIso: string } {
-  const start = DateTime.fromFormat(
-    `${date} ${startTime}`,
+  const refDayStart = DateTime.fromFormat(
+    `${date} 00:00`,
     'yyyy-MM-dd HH:mm',
-    { zone: timezone }
-  );
+    { zone: REFERENCE_TIMEZONE }
+  ).toUTC();
   
-  let end = DateTime.fromFormat(
-    `${date} ${endTime}`,
+  const refDayEnd = DateTime.fromFormat(
+    `${date} 23:59`,
     'yyyy-MM-dd HH:mm',
-    { zone: timezone }
-  );
+    { zone: REFERENCE_TIMEZONE }
+  ).toUTC();
+
+  const [startHour, startMin] = startTime.split(':').map(Number);
+  const [endHour, endMin] = endTime.split(':').map(Number);
   
-  if (end <= start) {
-    end = end.plus({ days: 1 });
+  let utcStart: DateTime | null = null;
+  let utcEnd: DateTime | null = null;
+  
+  let cursor = refDayStart;
+  while (cursor <= refDayEnd) {
+    const localTime = cursor.setZone(timezone);
+    const localMinutes = localTime.hour * 60 + localTime.minute;
+    const startMinutes = startHour * 60 + startMin;
+    const endMinutes = endHour * 60 + endMin;
+    
+    const isInRange = endMinutes > startMinutes
+      ? (localMinutes >= startMinutes && localMinutes < endMinutes)
+      : (localMinutes >= startMinutes || localMinutes < endMinutes);
+    
+    if (isInRange) {
+      if (!utcStart) {
+        utcStart = cursor;
+      }
+      utcEnd = cursor.plus({ minutes: 30 });
+    }
+    
+    cursor = cursor.plus({ minutes: 30 });
+  }
+  
+  if (!utcStart || !utcEnd) {
+    const fallbackStart = DateTime.fromFormat(
+      `${date} ${startTime}`,
+      'yyyy-MM-dd HH:mm',
+      { zone: timezone }
+    );
+    let fallbackEnd = DateTime.fromFormat(
+      `${date} ${endTime}`,
+      'yyyy-MM-dd HH:mm',
+      { zone: timezone }
+    );
+    if (fallbackEnd <= fallbackStart) {
+      fallbackEnd = fallbackEnd.plus({ days: 1 });
+    }
+    return {
+      startIso: fallbackStart.toUTC().toISO() || '',
+      endIso: fallbackEnd.toUTC().toISO() || '',
+    };
   }
   
   return {
-    startIso: start.toUTC().toISO() || '',
-    endIso: end.toUTC().toISO() || '',
+    startIso: utcStart.toUTC().toISO() || '',
+    endIso: utcEnd.toUTC().toISO() || '',
   };
 }
 

@@ -1,9 +1,10 @@
-import type { FamilyMember } from '../types';
+import type { FamilyMember, AvailabilityWindow } from '../types';
 import { getTimezoneDisplay } from '../utils/timezone';
 
 interface MemberListProps {
   members: FamilyMember[];
   currentUserId: string;
+  availabilities: AvailabilityWindow[];
   onSelectMember: (memberId: string) => void;
 }
 
@@ -16,6 +17,10 @@ export default function MemberList(props: MemberListProps) {
       default: return role;
     }
   };
+
+  const getMemberAvailabilityCount = (memberId: string) => {
+    return props.availabilities.filter(a => a.memberId === memberId).length;
+  };
   
   return (
     <div class="sidebar-card">
@@ -24,6 +29,7 @@ export default function MemberList(props: MemberListProps) {
       <ul class="member-list">
         {props.members.map(member => {
           const tzDisplay = getTimezoneDisplay(member.timezone);
+          const availCount = getMemberAvailabilityCount(member.id);
           
           return (
             <li 
@@ -41,6 +47,9 @@ export default function MemberList(props: MemberListProps) {
                 <div class="member-timezone">
                   {tzDisplay.cityName} · {tzDisplay.offset}
                   {tzDisplay.isDST && ' (夏令时)'}
+                </div>
+                <div class={`member-availability-status ${availCount > 0 ? 'has-avail' : 'no-avail'}`}>
+                  {availCount > 0 ? `✓ 已标记 ${availCount} 天` : '○ 未标记'}
                 </div>
               </div>
               <span class={`member-role ${member.role}`}>

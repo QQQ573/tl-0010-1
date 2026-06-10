@@ -1,4 +1,4 @@
-import { onMount, onCleanup } from 'solid-js';
+import { onMount, onCleanup, createEffect } from 'solid-js';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -167,6 +167,14 @@ export default function CalendarView(props: CalendarViewProps) {
     });
     
     calendar.render();
+  });
+  
+  createEffect(() => {
+    if (!calendar) return;
+    
+    calendar.setOption('events', buildEvents());
+    
+    setTimeout(addLunarDayNumbers, 50);
   });
   
   onCleanup(() => {

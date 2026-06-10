@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "mock": "json-server --watch mock/db.json --port 4000 --middlewares mock/middleware.cjs",
+    "mock": "json-server --watch mock/db.json --port 4002 --middlewares mock/middleware.cjs",
     "dev:all": "concurrently \"npm run dev\" \"npm run mock\""
   },
   "dependencies": {

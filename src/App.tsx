@@ -112,17 +112,19 @@ export default function App() {
     }
   };
   
-  const handleSaveAvailability = (newAvailabilities: Omit<AvailabilityWindow, 'id'>[]) => {
-    const memberAvails = availabilities().filter(
-      a => !(a.memberId === selectedMemberForAvailability()?.id)
+  const handleSaveAvailability = (newMemberAvailabilities: Omit<AvailabilityWindow, 'id'>[]) => {
+    const targetMemberId = selectedMemberForAvailability()?.id;
+    
+    const otherMemberAvails = availabilities().filter(
+      a => a.memberId !== targetMemberId
     );
     
-    const newWithIds = newAvailabilities.map((a, i) => ({
+    const newWithIds = newMemberAvailabilities.map((a, i) => ({
       ...a,
       id: `a_new_${Date.now()}_${i}`,
     }));
     
-    setAvailabilities([...memberAvails, ...newWithIds as AvailabilityWindow[]]);
+    setAvailabilities([...otherMemberAvails, ...newWithIds as AvailabilityWindow[]]);
     setShowAvailabilityEditor(false);
     setSelectedMemberForAvailability(null);
   };
@@ -214,6 +216,7 @@ export default function App() {
           <MemberList
             members={members()}
             currentUserId={currentUserId()}
+            availabilities={availabilities()}
             onSelectMember={handleSelectMemberForAvailability}
           />
         </aside>

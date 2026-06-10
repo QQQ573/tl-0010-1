@@ -329,6 +329,19 @@ body {
   color: #8b4513;
 }
 
+.member-availability-status {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.member-availability-status.has-avail {
+  color: #2e8b57;
+}
+
+.member-availability-status.no-avail {
+  color: #999;
+}
+
 .slot-card {
   padding: 10px;
   border: 1px solid #e0e0e0;

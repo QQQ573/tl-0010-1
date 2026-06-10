@@ -43,16 +43,7 @@ export default function AvailabilityEditor(props: AvailabilityEditorProps) {
   const [startTime, setStartTime] = createSignal('09:00');
   const [endTime, setEndTime] = createSignal('21:00');
   
-  const getCurrentAvailability = () => {
-    return props.availabilities.find(
-      a => a.memberId === props.member.id && a.date === selectedDate()
-    );
-  };
-  
   const addAvailability = () => {
-    const existing = getCurrentAvailability();
-    if (existing) return;
-    
     const newAvail = {
       memberId: props.member.id,
       date: selectedDate(),
@@ -61,13 +52,15 @@ export default function AvailabilityEditor(props: AvailabilityEditorProps) {
       timezone: props.member.timezone,
     };
     
-    props.onSave([...props.availabilities.filter(
+    const currentMemberAvails = memberAvailabilities().filter(
       a => !(a.memberId === props.member.id && a.date === selectedDate())
-    ), newAvail]);
+    );
+    
+    props.onSave([...currentMemberAvails, newAvail]);
   };
   
   const removeAvailability = (date: string) => {
-    props.onSave(props.availabilities.filter(
+    props.onSave(memberAvailabilities().filter(
       a => !(a.memberId === props.member.id && a.date === date)
     ));
   };
