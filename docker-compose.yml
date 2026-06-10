@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mock-server
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3001
+
+  mock-server:
+    build:
+      context: .
+      dockerfile: mock/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./mock:/app/mock

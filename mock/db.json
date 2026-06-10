@@ -1,0 +1,266 @@
+{
+  "members": [
+    {
+      "id": "m1",
+      "name": "爷爷",
+      "role": "elder",
+      "timezone": "Asia/Shanghai",
+      "isAdmin": true,
+      "canViewPrivateNotes": true
+    },
+    {
+      "id": "m2",
+      "name": "奶奶",
+      "role": "elder",
+      "timezone": "Asia/Shanghai",
+      "isAdmin": false,
+      "canViewPrivateNotes": true
+    },
+    {
+      "id": "m3",
+      "name": "大伯",
+      "role": "adult",
+      "timezone": "Asia/Shanghai",
+      "isAdmin": true,
+      "canViewPrivateNotes": false
+    },
+    {
+      "id": "m4",
+      "name": "爸爸",
+      "role": "adult",
+      "timezone": "America/Los_Angeles",
+      "isAdmin": false,
+      "canViewPrivateNotes": false
+    },
+    {
+      "id": "m5",
+      "name": "妈妈",
+      "role": "adult",
+      "timezone": "America/Los_Angeles",
+      "isAdmin": false,
+      "canViewPrivateNotes": false
+    },
+    {
+      "id": "m6",
+      "name": "叔叔",
+      "role": "adult",
+      "timezone": "America/New_York",
+      "isAdmin": false,
+      "canViewPrivateNotes": false
+    },
+    {
+      "id": "m7",
+      "name": "小明",
+      "role": "child",
+      "timezone": "America/Los_Angeles",
+      "isAdmin": false,
+      "canViewPrivateNotes": false
+    },
+    {
+      "id": "m8",
+      "name": "小红",
+      "role": "child",
+      "timezone": "Asia/Shanghai",
+      "isAdmin": false,
+      "canViewPrivateNotes": false
+    }
+  ],
+  "slots": [
+    {
+      "id": "s1",
+      "title": "初一早间拜年",
+      "startIso": "2026-02-17T09:00:00+08:00",
+      "endIso": "2026-02-17T10:00:00+08:00",
+      "maxParticipants": 6,
+      "description": "正月初一早上，大家一起给爷爷奶奶拜年",
+      "privateNote": "爷爷早上血压容易高，不要聊太久",
+      "createdBy": "m1",
+      "createdAt": "2026-01-15T10:00:00Z"
+    },
+    {
+      "id": "s2",
+      "title": "初一晚间拜年",
+      "startIso": "2026-02-17T20:00:00+08:00",
+      "endIso": "2026-02-17T21:30:00+08:00",
+      "maxParticipants": 8,
+      "description": "晚饭后全家视频聊天",
+      "privateNote": null,
+      "createdBy": "m1",
+      "createdAt": "2026-01-15T10:00:00Z"
+    },
+    {
+      "id": "s3",
+      "title": "初二家族聚会",
+      "startIso": "2026-02-18T10:00:00+08:00",
+      "endIso": "2026-02-18T12:00:00+08:00",
+      "maxParticipants": 10,
+      "description": "初二回娘家，全员视频",
+      "privateNote": "奶奶准备了红包，记得说吉利话",
+      "createdBy": "m3",
+      "createdAt": "2026-01-16T08:00:00Z"
+    },
+    {
+      "id": "s4",
+      "title": "初五迎财神",
+      "startIso": "2026-02-21T08:00:00+08:00",
+      "endIso": "2026-02-21T09:00:00+08:00",
+      "maxParticipants": 5,
+      "description": "初五早上迎财神",
+      "privateNote": null,
+      "createdBy": "m3",
+      "createdAt": "2026-01-17T14:00:00Z"
+    },
+    {
+      "id": "s5",
+      "title": "元宵节团圆",
+      "startIso": "2026-03-03T19:00:00+08:00",
+      "endIso": "2026-03-03T21:00:00+08:00",
+      "maxParticipants": 8,
+      "description": "正月十五元宵节，吃汤圆视频",
+      "privateNote": null,
+      "createdBy": "m1",
+      "createdAt": "2026-01-20T09:00:00Z"
+    }
+  ],
+  "availabilities": [
+    {
+      "id": "a1",
+      "memberId": "m1",
+      "date": "2026-02-17",
+      "startTime": "08:00",
+      "endTime": "22:00",
+      "timezone": "Asia/Shanghai"
+    },
+    {
+      "id": "a2",
+      "memberId": "m2",
+      "date": "2026-02-17",
+      "startTime": "09:00",
+      "endTime": "21:00",
+      "timezone": "Asia/Shanghai"
+    },
+    {
+      "id": "a3",
+      "memberId": "m3",
+      "date": "2026-02-17",
+      "startTime": "08:00",
+      "endTime": "23:00",
+      "timezone": "Asia/Shanghai"
+    },
+    {
+      "id": "a4",
+      "memberId": "m4",
+      "date": "2026-02-17",
+      "startTime": "17:00",
+      "endTime": "23:00",
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "id": "a5",
+      "memberId": "m5",
+      "date": "2026-02-17",
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "id": "a6",
+      "memberId": "m6",
+      "date": "2026-02-17",
+      "startTime": "20:00",
+      "endTime": "23:59",
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "a7",
+      "memberId": "m7",
+      "date": "2026-02-17",
+      "startTime": "16:00",
+      "endTime": "21:00",
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "id": "a8",
+      "memberId": "m8",
+      "date": "2026-02-17",
+      "startTime": "10:00",
+      "endTime": "22:00",
+      "timezone": "Asia/Shanghai"
+    },
+    {
+      "id": "a9",
+      "memberId": "m1",
+      "date": "2026-02-18",
+      "startTime": "09:00",
+      "endTime": "21:00",
+      "timezone": "Asia/Shanghai"
+    },
+    {
+      "id": "a10",
+      "memberId": "m4",
+      "date": "2026-02-18",
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "timezone": "America/Los_Angeles"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "b1",
+      "slotId": "s1",
+      "memberId": "m1",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T10:00:00Z"
+    },
+    {
+      "id": "b2",
+      "slotId": "s1",
+      "memberId": "m2",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T10:05:00Z"
+    },
+    {
+      "id": "b3",
+      "slotId": "s1",
+      "memberId": "m3",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T10:10:00Z"
+    },
+    {
+      "id": "b4",
+      "slotId": "s1",
+      "memberId": "m4",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T11:00:00Z"
+    },
+    {
+      "id": "b5",
+      "slotId": "s2",
+      "memberId": "m1",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T10:00:00Z"
+    },
+    {
+      "id": "b6",
+      "slotId": "s2",
+      "memberId": "m2",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T10:00:00Z"
+    },
+    {
+      "id": "b7",
+      "slotId": "s2",
+      "memberId": "m4",
+      "status": "confirmed",
+      "bookedAt": "2026-01-16T12:00:00Z"
+    },
+    {
+      "id": "b8",
+      "slotId": "s2",
+      "memberId": "m5",
+      "status": "waitlist",
+      "waitlistPosition": 1,
+      "bookedAt": "2026-01-16T12:30:00Z"
+    }
+  ]
+}
